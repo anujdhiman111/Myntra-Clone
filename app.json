@@ -1,5 +1,6 @@
 {
   "expo": {
+    "proxy": "http://localhost:3001",
     "name": "Myntra-Clone",
     "slug": "Myntra-Clone",
     "version": "1.0.0",
