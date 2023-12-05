@@ -32,7 +32,7 @@ const Login = ({navigation}) => {
   }
     return (
       <SafeAreaView style = {styles.container}>
-        <View>
+        <View style = {styles.mainContent}>
           <Text style={styles.title}>Login</Text>
           <TextInput
             style={styles.input}
@@ -48,9 +48,11 @@ const Login = ({navigation}) => {
             placeholder="Enter your password"
             secureTextEntry = {true}
           />
-    
-          <Button title="Login" onPress={handleLogin}/>
-          <TouchableOpacity onPress={handleSignUp}><Text>Not have an Account?</Text></TouchableOpacity>
+          <TouchableOpacity onPress={handleLogin} style = {styles.button}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.buttonText} onPress={handleSignUp}><Text>Not have an Account?</Text></TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -60,7 +62,7 @@ const Login = ({navigation}) => {
       container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingTop:'20%',
+        paddingTop:'65%',
       },
       label: {
         fontSize: 16,
@@ -72,13 +74,31 @@ const Login = ({navigation}) => {
         borderWidth: 1,
         marginBottom: 16,
         paddingHorizontal: 10,
+        borderRadius:10
       },
       title: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
         color: 'blue',
-        marginBottom:10
+        marginBottom:10,
+        textAlign: 'center',
+        color:'#F41CB2'
       },
+      button: {
+        backgroundColor: '#F41CB2',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: '5%'
+      },
+      buttonText: {
+        color: 'white',
+        textAlign: 'center',
+      },
+      mainContent:{
+        width:'90%',
+        marginLeft:'auto',
+        marginRight:'auto',
+      }
     });
 
 export default Login

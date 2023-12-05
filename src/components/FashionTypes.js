@@ -53,10 +53,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   listItem: {
-    flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    minWidth: 100,
+    height:'10%'
   },
 });
 
