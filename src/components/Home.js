@@ -1,41 +1,43 @@
-// import React from 'react'
-import {SafeAreaView, StyleSheet, Text, View, Button, TextInput} from 'react-native';
-
-
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SearchBar } from 'react-native-elements';
+import React, { useState } from 'react';
+import Header from './Header';
+import FashionTypes from './FashionTypes';
+import Footer from './Footer';
 const Home = () => {
+  const [searchText, setSearchText] = useState('');
+  const search = () => {
+    if(searchText != ''){
+      console.log(searchText)
+    }
+  }
   return (
-    <SafeAreaView style = {styles.container}>
-        <View>
-            <Text>Home Page</Text>
-        </View>
+    <SafeAreaView style={styles.container}>
+      <Header/>
+      <View>
+        <SearchBar
+          placeholder = "Search for brands" 
+          backgroundColor = "white" 
+          onChangeText = {setSearchText} 
+          value = {searchText} 
+          onSubmitEditing = {search}
+         />
+      </View>
+      <FashionTypes/>
+      <Footer/>
     </SafeAreaView>
-    
+
   )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      paddingTop:'20%',
-    },
-    // label: {
-    //   fontSize: 16,
-    //   marginBottom: 8,
-    // },
-    // input: {
-    //   height: 40,
-    //   borderColor: 'gray',
-    //   borderWidth: 1,
-    //   marginBottom: 16,
-    //   paddingHorizontal: 10,
-    // },
-    // title: {
-    //   fontSize: 20,
-    //   fontWeight: 'bold',
-    //   color: 'blue',
-    //   marginBottom:10
-    // },
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingTop: '10%',
+    // justifyContent: 'space-between'
+  },
+
 });
 
 export default Home

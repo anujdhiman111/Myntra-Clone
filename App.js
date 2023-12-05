@@ -2,7 +2,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigation from './src/navigator/AppNavigation';
+// import { load } from 'react-native-feather';
 
+// load();
 export default function App() {
   // console.log("app executed")
   return (
