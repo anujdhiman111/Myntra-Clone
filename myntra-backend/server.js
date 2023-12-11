@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const twilio = require('twilio');
 
 const app = express();
 const PORT = 3001;
@@ -9,46 +10,60 @@ const PORT = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+const accountSid = "AC6c26e7ef35c406b61512200dc9f0fc6d"
+const authToken = "68ce11967e681b3686832ffe14340603"
+const twilioClient = new twilio(accountSid,authToken)
+
 mongoose.connect('mongodb+srv://adhiman111111:anujdhiman890@cluster0.smakff2.mongodb.net/?retryWrites=true&w=majority',console.log("connection"), {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  email:String,
+  name: String,
+  phoneNumber: Number,
 });
 
 const User = mongoose.model('User', userSchema);
 
-app.post('/sendData', async (req, res) => {
-  // console.log("enter",req.body)
+app.post('/sendOtp', async (req, res) => {
+  console.log("enter",req.body)
   try {
-    const { username, password } = req.body;
-    const user = new User({ username, password });
-    await user.save();
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (error) {
+    const { phoneNumber } = req.body;
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    twilioClient.messages
+    .create({
+      body: `Your OTP for Myntra is ${otp}`,
+      from: '+14152372725',
+      to: `+91${phoneNumber}`
+    })
+    .then(() =>{
+      res.status(200).json({ message: "OTP sent successfully", otp:otp });
+    })
+  }
+  catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
   }
-  // res.send('Welcome to my server1!');
-
 });
 
 
 app.post('/checkData', async(req, res) => {
   try {
-    const { username, password } = req.body;
-    let users = await User.find({}).exec();
-      for(let u of users){
-        if((u.username == username) && (u.password == password)){
-          // console.log("Logged")
-          res.status(201).json({ message: 'Login successfully' });
-        }
-      }
-  } catch (error) {
+    const {name, phoneNumber} = req.body;
+    let user = await User.findOne({phoneNumber}).exec();
+
+    if (user) {
+      res.status(200).json({ message: 'Mobile number exists', exists: true });
+    } 
+    else {
+      const newUser = new User({ name, phoneNumber });
+      await newUser.save();
+      res.status(200).json({ message: 'User saved successfully', exists: false });
+    }
+  } 
+  catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
   }
