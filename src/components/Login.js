@@ -24,9 +24,7 @@ const Login = ({navigation}) => {
       );
       console.log('Login successfully:', response.data);
       const OTP = response.data.otp
-      // setVerifyCode(OTP)
       console.log(OTP)
-      // console.log(name,phoneNumber,verifyCode)
       saveInfo(name,phoneNumber,OTP)
       navigation.navigate('VerifyOtp')
     } 
@@ -62,7 +60,6 @@ const Login = ({navigation}) => {
             onChangeText={setPhoneNumber}
             value={phoneNumber}
             placeholder="Enter your Number"
-            secureTextEntry = {true}
           />
           <Text style={styles.loginPara}>By continuing, I agree to the <Text style = {styles.subLoginText}>Terms of Use</Text> & <Text style = {styles.subLoginText}>Privacy Policy</Text></Text>
 

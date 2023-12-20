@@ -1,52 +1,53 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-// import { TouchableOpacity } from 'react-native-web';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const FashionTypes = () => {
+const FashionTypes = ({navigation}) => {
+  const[products,setProducts] = useState() 
   const fashionArrayOne = ['SHIRTS', 'T-SHIRTS', 'CASUAL SHOES', 'JEANS', 'WINTERWEAR', 'KURTA SETS', 'TROUSERS', 'HEADPHONES']
   const fashionArrayTwo = ['DRESSES', 'KURTAS', 'KIDS', 'PENTS', 'JACKET', 'SAREES', 'HANDBAGS', 'PERSONALCARE']
 
+  const showProducts = () => {
+    navigation.navigate('ShowProducts')
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.selectFashion}>
-        <Text>Fashion</Text>
-        <Text>Beauty</Text>
+        <Text style = {[styles.typeTag, styles.typeTagOne]}>Fashion</Text>
+        <Text style = {styles.typeTag}>Beauty</Text>
       </View>
       <ScrollView horizontal style={styles.scrollView}>
         <View style={styles.fashionType}>
           {fashionArrayOne.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.listItem}>
+            <TouchableOpacity key={index} style={styles.listItem} onPress={showProducts}>
               <Text>{item}</Text>
             </TouchableOpacity>
           ))}
         </View>
-        </ScrollView>
-        <ScrollView horizontal style={styles.scrollView}>
+      </ScrollView>
+      <ScrollView horizontal style={styles.scrollView}>
         <View style={styles.fashionType}>
           {fashionArrayTwo.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.listItem}>
+            <TouchableOpacity key={index} style={styles.listItem} onPress={showProducts}>
               <Text>{item}</Text>
             </TouchableOpacity>
           ))}
         </View>
-        </ScrollView>
+      </ScrollView>
       
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: '5%',
-  },
   selectFashion: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: '5%',
+    justifyContent: 'space-between',
+    marginTop: '8%',
   },
   scrollView: {
-    marginTop: '5%',
+    marginTop: '6%',
   },
   fashionType: {
     flexDirection: 'row',
@@ -55,8 +56,20 @@ const styles = StyleSheet.create({
   listItem: {
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    height:'10%'
   },
+  typeTag:{
+    borderWidth:2,
+    borderColor:"black",
+    borderRadius:20,
+    paddingHorizontal:'15%',
+    paddingVertical:8,
+    fontWeight:'600',
+    fontSize:16
+  },
+  typeTagOne:{
+    backgroundColor:'black',
+    color:'white'
+  }
 });
 
 export default FashionTypes;

@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 const Footer = () => {
     const footerArray = ['Home', 'Hot Trends', 'Everyday', 'Brands', 'Anuj']
   return (
-    <SafeAreaView style = {styles.container}>
+    <SafeAreaView style = {styles.footerContainer}>
         <View style = {styles.footerContent}>
             {footerArray.map((item, index) => (
                 <View key={index} style={styles.listItem}>
@@ -17,12 +17,12 @@ const Footer = () => {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        backgroundColor: 'lightgray',
-        justifyContent: 'center',
-        // alignItems: 'center',
+    footerContainer:{
+        display:'flex',
+        backgroundColor: 'gold',
+        justifyContent: 'end',
         paddingHorizontal: '5%',
-        paddingVertical: '3%'
+        paddingVertical: '5%'
     },
     footerContent:{
         flexDirection: 'row',
